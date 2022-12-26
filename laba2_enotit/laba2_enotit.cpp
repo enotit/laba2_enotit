@@ -2,20 +2,9 @@
 #include <string>
 #include <fstream>
 #include <Windows.h>
-//#include <locale>
+#include "class.cpp"
 
 using namespace std;
-
-struct Disk
-{
-	string title;
-	string director;
-	string genre;
-	unsigned short int duration;
-	unsigned short int year;
-	string company;
-	float imdb;
-};
 
 void write_file(Disk arr[], int array_len, string file_name)
 {
@@ -24,13 +13,13 @@ void write_file(Disk arr[], int array_len, string file_name)
 	for (int i = 0; i < array_len; i++)
 	{
 		Disk disk = arr[i];
-		fout << disk.title << endl;
-		fout << disk.director << endl;
-		fout << disk.genre << endl;
-		fout << disk.duration << endl;
-		fout << disk.year << endl;
-		fout << disk.company << endl;
-		fout << disk.imdb << endl;
+		fout << disk.getTitle() << endl;
+		fout << disk.getDirector() << endl;
+		fout << disk.getGenre() << endl;
+		fout << disk.getDuration() << endl;
+		fout << disk.getYear() << endl;
+		fout << disk.getCompany() << endl;
+		fout << disk.getIMBD() << endl;
 	}
 
 	fout.close();
@@ -38,13 +27,13 @@ void write_file(Disk arr[], int array_len, string file_name)
 
 void print_disk(Disk disk)
 {
-	cout << "Фильм: '" << disk.title << "'\n";
-	cout << "Режиссёр: '" << disk.director << "'\n";
-	cout << "Жанр: '" << disk.genre << "'\n";
-	cout << "Длительность(мин): '" << disk.duration << "'\n";
-	cout << "Год выпуска: '" << disk.year << "'\n";
-	cout << "Компания: '" << disk.company << "'\n";
-	cout << "Оценка: '" << disk.imdb << "'\n";
+	cout << "Фильм: '" << disk.getTitle() << "'\n";
+	cout << "Режиссёр: '" << disk.getDirector() << "'\n";
+	cout << "Жанр: '" << disk.getGenre() << "'\n";
+	cout << "Длительность(мин): '" << disk.getDuration() << "'\n";
+	cout << "Год выпуска: '" << disk.getYear() << "'\n";
+	cout << "Компания: '" << disk.getCompany() << "'\n";
+	cout << "Оценка: '" << disk.getIMBD() << "'\n";
 	cout << "=========================\n";
 }
 
@@ -53,14 +42,24 @@ Disk *disks;
 Disk read_file(ifstream &file)
 {
 	Disk disk;
-	getline(file, disk.title);
-	getline(file, disk.director);
-	getline(file, disk.genre);
-	file >> disk.duration;
-	file >> disk.year;
+	string temp;
+	getline(file, temp);
+	disk.setTitle(temp);
+	getline(file, temp);
+	disk.setDirector(temp);
+	getline(file, temp);
+	disk.setGenre(temp);
+	unsigned short int temp_usi;
+	file >> temp_usi;
+	disk.setDuration(temp_usi);
+	file >> temp_usi;
+	disk.setYear(temp_usi);
 	file.get();
-	getline(file, disk.company);
-	file >> disk.imdb;
+	getline(file, temp);
+	disk.setCompany(temp);
+	float temp_float;
+	file >> temp_float;
+	disk.setIMBD(temp_float);
 	file.get();
 	print_disk(disk);
 	return disk;
@@ -69,8 +68,8 @@ Disk read_file(ifstream &file)
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	// SetConsoleOutputCP(1251); // FIXME: почему то не работает( 
-	//SetConsoleCP(1251); // FIXME: почему то не работает( 
+	// SetConsoleOutputCP(1251); // FIXME: почему то не работает(
+	// SetConsoleCP(1251); // FIXME: почему то не работает(
 	ifstream infile;
 	infile.open("text.txt");
 
@@ -93,13 +92,13 @@ int main()
 	for (int i = 0; i < count; i++)
 	{
 
-		if (disks[i].year < m_year && director == disks[i].director)
+		if (disks[i].getYear() < m_year && director == disks[i].getDirector())
 		{
 			result = disks[i];
-			m_year = result.year;
+			m_year = result.getYear();
 		}
 	}
-	cout << result.title << " в " << m_year << endl;
+	cout << result.getTitle() << " в " << m_year << endl;
 
 	string genre;
 	cout << "Выведите жанр:";
@@ -108,9 +107,9 @@ int main()
 
 	for (int i = 0; i < count; i++)
 	{
-		if (disks[i].imdb >= 8.0 && genre == disks[i].genre)
+		if (disks[i].getIMBD() >= 8.0 && genre == disks[i].getGenre())
 		{
-			cout << disks[i].title << endl;
+			cout << disks[i].getTitle() << endl;
 		}
 	}
 
