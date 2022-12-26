@@ -25,17 +25,6 @@ void write_file(Disk arr[], int array_len, string file_name)
 	fout.close();
 };
 
-void print_disk(Disk disk)
-{
-	cout << "Фильм: '" << disk.getTitle() << "'\n";
-	cout << "Режиссёр: '" << disk.getDirector() << "'\n";
-	cout << "Жанр: '" << disk.getGenre() << "'\n";
-	cout << "Длительность(мин): '" << disk.getDuration() << "'\n";
-	cout << "Год выпуска: '" << disk.getYear() << "'\n";
-	cout << "Компания: '" << disk.getCompany() << "'\n";
-	cout << "Оценка: '" << disk.getIMBD() << "'\n";
-	cout << "=========================\n";
-}
 
 Disk *disks;
 
@@ -61,13 +50,13 @@ Disk read_file(ifstream &file)
 	file >> temp_float;
 	disk.setIMBD(temp_float);
 	file.get();
-	print_disk(disk);
+	disk.print_disk();
 	return disk;
 };
 
 int main()
 {
-	setlocale(LC_ALL, "Russian");
+	//setlocale(LC_ALL, "Russian");
 	// SetConsoleOutputCP(1251); // FIXME: почему то не работает(
 	// SetConsoleCP(1251); // FIXME: почему то не работает(
 	ifstream infile;
