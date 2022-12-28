@@ -38,6 +38,8 @@ public:
     Disk(): title(""), director(""), genre(""), duration(60), year(1929), company("Disney"), imdb() {};
     Disk(string title, string director, string genre, unsigned short int duration, unsigned short int year, string company, float note_imdb);
     ~Disk();
+    void write_file(Disk arr[], int array_len, string file_name);
+    void read_file(ifstream &file);
 };
 
 #endif

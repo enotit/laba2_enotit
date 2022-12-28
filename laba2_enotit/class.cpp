@@ -90,6 +90,29 @@ Disk::Disk(string title, string director, string genre, unsigned short int durat
 };
 Disk::~Disk()
 {
-    cout << "Фильм: \"" << this->title << "\" был удалён.\n";
+    //cout << "Фильм: \"" << this->title << "\" был удалён.\n";
 }
+
+
+void Disk::read_file(ifstream &file)
+{
+	string temp;
+	getline(file, temp);
+	this->setTitle(temp);
+	getline(file, temp);
+	this->setDirector(temp);
+	getline(file, temp);
+	this->setGenre(temp);
+	getline(file, temp);
+	this->setDuration(stoi(temp));
+	getline(file, temp);
+	this->setYear(stoi(temp));
+	//file.get();
+	getline(file, temp);
+	this->setCompany(temp);
+	getline(file, temp);
+	this->setIMBD(::atof(temp.c_str()));
+	//file.get();
+	this->print_disk();
+};
 

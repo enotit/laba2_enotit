@@ -11,4 +11,3 @@ IMDB::IMDB(float note)
     this->note = note;
     this->comment = "was created";
 };
-
