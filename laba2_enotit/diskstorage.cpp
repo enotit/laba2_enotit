@@ -19,6 +19,13 @@ void DiskStorage::add_disk(Disk disk)
 	this->disks[this->count] = disk;
 	this->count++;
 }
+void DiskStorage::add_copy_disk(CopyDisk disk)
+{
+	if (this->count_copy >= this->max_count_copy)
+		return;
+	this->copy_disks[this->count_copy] = disk;
+	this->count_copy++;
+}
 
 void DiskStorage::read_file_all(string filename)
 {
@@ -79,4 +86,8 @@ void DiskStorage::display()
 void DiskStorage::operator+=(const Disk &disk)
 {
 	DiskStorage::add_disk(disk);
+};
+void DiskStorage::operator+=(const CopyDisk &disk)
+{
+	DiskStorage::add_copy_disk(disk);
 };

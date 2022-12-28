@@ -5,7 +5,6 @@
 #include "imdb.h"
 using namespace std;
 
-
 class Disk
 {
 private:
@@ -35,16 +34,29 @@ public:
     unsigned short int getYear();
     float getIMBD();
     void print_disk();
-    Disk(): title(""), director(""), genre(""), duration(60), year(1929), company("Disney"), imdb() {};
+    Disk() : title(""), director(""), genre(""), duration(60), year(1929), company("Disney"), imdb(){};
     Disk(string title, string director, string genre, unsigned short int duration, unsigned short int year, string company, float note_imdb);
     ~Disk();
     void write_file(Disk arr[], int array_len, string file_name);
     void read_file(ifstream &file);
-    bool operator==(const Disk & another);
-    bool operator!=(const Disk & another);
-    friend ostream& operator<<(ostream & stream, const Disk & disk);
-    friend istream& operator>>(istream & stream, Disk & disk);
-    void Write(ostream & stream) const;
+    bool operator==(const Disk &another);
+    bool operator!=(const Disk &another);
+    friend ostream &operator<<(ostream &stream, const Disk &disk);
+    friend istream &operator>>(istream &stream, Disk &disk);
+    void Write(ostream &stream) const;
+};
+
+class CopyDisk : public Disk
+{
+    private:
+        string basement;
+        string type; // Orig / TS
+    public: 
+        CopyDisk() : Disk(), basement("Напротив дома"), type("TS") {};
+        bool operator==(const CopyDisk &another);
+        bool operator!=(const CopyDisk &another);
+        friend ostream &operator<<(ostream &stream, const CopyDisk &disk);
+        friend istream &operator>>(istream &stream, CopyDisk &disk);
 };
 
 #endif
