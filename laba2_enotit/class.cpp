@@ -107,12 +107,48 @@ void Disk::read_file(ifstream &file)
 	this->setDuration(stoi(temp));
 	getline(file, temp);
 	this->setYear(stoi(temp));
-	//file.get();
 	getline(file, temp);
 	this->setCompany(temp);
 	getline(file, temp);
 	this->setIMBD(::atof(temp.c_str()));
-	//file.get();
 	this->print_disk();
 };
 
+bool Disk::operator==(const Disk & another){
+    return this->company.compare(another.company) && 
+           this->title.compare(another.title) && 
+           this->director.compare(another.director) && 
+           this->genre.compare(another.genre) && 
+           this->duration == another.duration &&
+           this->year == another.year &&
+           this->imdb.note == another.imdb.note;
+};
+
+bool Disk::operator!=(const Disk & another)
+{
+	return !operator==(another);
+};
+
+void Disk::Write(ostream & file) const
+{
+	file << "Фильм: '" << this->title << "'\n"
+    << "Режиссёр: '" << this->director << "'\n"
+    << "Жанр: '" << this->genre << "'\n"
+    << "Длительность(мин): '" << this->duration << "'\n"
+    << "Год выпуска: '" << this->year << "'\n"
+    << "Компания: '" << this->company << "'\n"
+    << "Оценка: '" << this->imdb.note << "'\n"
+    << "=========================\n";
+}
+
+// Оператор записи в поток.
+ostream& operator<<(ostream & stream, const Disk & disk)
+{
+	disk.Write(stream);
+	return stream;
+}
+istream& operator>>(ifstream & stream, Disk & disk)
+{
+	disk.read_file(stream);
+	return stream;
+}

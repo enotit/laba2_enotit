@@ -11,7 +11,7 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	// SetConsoleOutputCP(1251); // FIXME: почему то не работает(
-	SetConsoleCP(1251); // FIXME: почему то не работает(
+	//SetConsoleCP(1251); // FIXME: почему то не работает(
 	DiskStorage disks(20);
 	disks.read_file_all("text.txt");
 	disks.display();
