@@ -20,6 +20,7 @@ public:
     int get_file_str_quantity(ifstream &infile);
     void read_file_all(string filename);
     void write_file(string file_name);
+    void operator +=(const Disk &disk);
 };  
 
 #endif

@@ -7,24 +7,22 @@ using namespace std;
 
 DiskStorage::~DiskStorage()
 {
-    this->count = 0;
-    this->max_count = 0;
-    delete this->disks;
+	this->count = 0;
+	this->max_count = 0;
+	delete this->disks;
 };
 
 void DiskStorage::add_disk(Disk disk)
 {
-    if (this->count >= this->max_count)
-	    return; 
-    this->disks[this->count] = disk;
-    this->count++;
+	if (this->count >= this->max_count)
+		return;
+	this->disks[this->count] = disk;
+	this->count++;
 }
-
-
 
 void DiskStorage::read_file_all(string filename)
 {
-    ifstream infile;
+	ifstream infile;
 	infile.open(filename);
 	if (!infile.is_open())
 	{
@@ -65,8 +63,8 @@ void DiskStorage::write_file(string file_name)
 	fout.close();
 };
 
-
-DiskStorage::DiskStorage(int max_cnt){
+DiskStorage::DiskStorage(int max_cnt)
+{
 	this->disks = new Disk[max_cnt];
 };
 
@@ -75,6 +73,10 @@ void DiskStorage::display()
 	for (int i = 0; i < this->count; i++)
 	{
 		this->disks[i].print_disk();
-
 	}
 }
+
+void DiskStorage::operator+=(const Disk &disk)
+{
+	DiskStorage::add_disk(disk);
+};

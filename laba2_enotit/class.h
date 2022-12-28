@@ -40,15 +40,10 @@ public:
     ~Disk();
     void write_file(Disk arr[], int array_len, string file_name);
     void read_file(ifstream &file);
-    // Переопределение операторов.
-	// Оператор проверки равенства.
-	bool operator==(const Disk & another);
-	// Оператор проверки неравенства.
-	bool operator!=(const Disk & another);
-	// Оператор записи в поток.
-	friend ostream& operator<<(ostream & stream, const Disk & disk);
-	// Оператор чтения из потока.
-	friend istream& operator>>(istream & stream, Disk & disk);
+    bool operator==(const Disk & another);
+    bool operator!=(const Disk & another);
+    friend ostream& operator<<(ostream & stream, const Disk & disk);
+    friend istream& operator>>(istream & stream, Disk & disk);
     void Write(ostream & stream) const;
 };
 
